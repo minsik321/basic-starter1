@@ -158,5 +158,4 @@ ___
 
 ### `sc.nextline();` 사용시 다음 input 입력값이 무시됨
 - `sc.nextline();` 를 `sc2.nextline();` 으로 수정함
-
 ___
