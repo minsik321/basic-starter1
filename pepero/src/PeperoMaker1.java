@@ -1,60 +1,88 @@
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class PeperoMaker1 {
-    public static void main(String[] args) {
-        Scanner sc1 = new Scanner(System.in);
-        Scanner sc2 = new Scanner(System.in);
-        Pepero1 pepero = new Pepero1();
+    public static void addPepero(List<Pepero1> addPeperos) {
+        Scanner input1 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
 
-        System.out.println("빼빼로 에 대한 정보 입력을 받습니다. 내용이 없을 시 \"null\" 이라고 입력 바랍니다.");
-        System.out.print("길이 : ");
-        pepero.setLength(sc1.nextInt());
-        System.out.print("몸통 모양 : ");
-        pepero.setFirstBody(sc2.nextLine());
-        System.out.print("교차될 몸통 모양 (기존과 같을 시 같은 모양으로 입력 부탁 드립니다.) : ");
-        pepero.setSecondBody(sc2.nextLine());
-        System.out.print("토핑 모양 : ");
-        pepero.setFirstTopping(sc1.next());
-        System.out.print("교차될 토핑 모양 (기존과 같을 시 같은 모양으로 입력 부탁 드립니다.) : ");
-        pepero.setSecondTopping(sc1.next());
-        System.out.print("막대 길이 : ");
-        pepero.setSticklength(sc1.nextInt());
-
+        for (int i = 0; i < addPeperos.size(); i++) {
+            System.out.println("추가 하는 빼빼로가 있습니까?");
+            String answer = input1.next();
+            if (!answer.equals("null")) {
+                System.out.println("추가 빼빼로에 대한 값을 입력 받습니다. 이전과 같이 입력 부탁드립니다.");
+                Pepero1 addtionalPepero = new Pepero1
+                        (input1.nextInt(),input2.nextLine(),input2.nextLine(),input1.next(),
+                        input1.next(),input1.nextInt());
+                addPeperos.add(addtionalPepero);
+            } else if (answer.equals("null")) {
+                break;
+            }
+        }
+    }
+    public static void printInformation(Pepero1 pepero) {
         System.out.println("<정보>");
-        System.out.println("길이 : " + pepero.getLength());
-        if (pepero.getFirstBody().equals(pepero.getSecondBody())) {
-            System.out.println("몸통 : " + pepero.getFirstBody());
+        System.out.println("길이 : " + pepero.length);
+        if (pepero.firstBody.equals(pepero.secondBody)) {
+            System.out.println("몸통 : " + pepero.firstBody);
         } else {
-            System.out.println("몸통 : " + pepero.getFirstBody() + " or " + pepero.getSecondBody());
+            System.out.println("몸통 : " + pepero.firstBody + " or " + pepero.secondBody);
         }
-        if (pepero.getFirstTopping().equals(pepero.getSecondTopping())) {
-            System.out.println("토핑 : " + pepero.getFirstTopping());
-        } else if (pepero.getFirstTopping().equals("null")){
-            System.out.println("토핑 : " + pepero.getSecondTopping());
-        } else if (pepero.getSecondTopping().equals("null")) {
-            System.out.println("토핑 : " + pepero.getFirstTopping());
+        if (pepero.firstTopping.equals(pepero.secondTopping)) {
+            System.out.println("토핑 : " + pepero.firstTopping);
+        } else if (pepero.firstTopping.equals("null")){
+            System.out.println("토핑 : " + pepero.secondTopping);
+        } else if (pepero.secondTopping.equals("null")) {
+            System.out.println("토핑 : " + pepero.firstTopping);
         } else {
-            System.out.println("토핑 : " + pepero.getFirstTopping() + " or " + pepero.getSecondTopping());
+            System.out.println("토핑 : " + pepero.firstTopping + " or " + pepero.secondTopping);
         }
-        System.out.println("막대길이 : " + pepero.getSticklength());
+        System.out.println("막대길이 : " + pepero.sticklength);
         System.out.println();
-
-        for (int i = 0; i < pepero.getLength(); i++) {
-            if (pepero.getFirstTopping().equals("null")) {
-                System.out.println(" " + pepero.getFirstBody());
+    }
+    public static void printPepero(Pepero1 pepero) {
+        for (int length = 0; length < pepero.length; length++) {
+            if (pepero.firstTopping.equals("null")) {
+                System.out.println(" " + pepero.firstBody);
             } else {
-                System.out.println(pepero.getFirstTopping() + pepero.getFirstBody() + pepero.getFirstTopping());
+                System.out.println(pepero.firstTopping + pepero.firstBody + pepero.firstTopping);
             }
-            i++;
-            if (i < pepero.getLength() && pepero.getSecondTopping().equals("null")) {
-                System.out.println(" " + pepero.getSecondBody());
-            } else if (i < pepero.getLength()) {
-                System.out.println(pepero.getSecondTopping() + pepero.getSecondBody() + pepero.getSecondTopping());
+            length++;
+            if (length < pepero.length && pepero.secondTopping.equals("null")) {
+                System.out.println(" " + pepero.secondBody);
+            } else if (length < pepero.length) {
+                System.out.println(pepero.secondTopping + pepero.secondBody + pepero.secondTopping);
             }
         }
-        for (int i = 0; i < pepero.getSticklength(); i++) {
+        for (int stickLength = 0; stickLength < pepero.sticklength; stickLength++) {
             System.out.println(" | |");
         }
+        System.out.println();
+        System.out.println("----------------");
+        System.out.println();
+    }
 
+    public static void main(String[] args) {
+        Scanner input1 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+        List<Pepero1> peperos = new ArrayList<>();
+
+        System.out.println("빼빼로 에 대한 정보 입력을 받습니다.\n" +
+                "순서대로 기입해 주시고, 내용이 없을 시 \"null\" 이라고 입력 바랍니다.\n" +
+                "교차 되는 부분이 기존과 같은 모양일 경우 같은 모양으로 입력 바랍니다.\n" +
+                "길이, 몸통 모양, 교차될 몸통 모양, 토핑 모양, 교차될 토핑 모양, 막대길이");
+
+        Pepero1 pepero = new Pepero1
+                (input1.nextInt(),input2.nextLine(),input2.nextLine(),input1.next(),
+                        input1.next(),input1.nextInt());
+        peperos.add(pepero);
+
+        addPepero(peperos);
+
+        for (int numberOfPepero = 0; numberOfPepero < peperos.size(); numberOfPepero++) {
+            printInformation(peperos.get(numberOfPepero));
+            printPepero(peperos.get(numberOfPepero));
+        }
     }
 }
