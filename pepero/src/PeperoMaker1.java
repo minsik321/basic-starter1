@@ -3,21 +3,39 @@ import java.util.List;
 import java.util.Scanner;
 
 public class PeperoMaker1 {
+    public static void getAnswers(List<Pepero1> addPeperos) {
+        Scanner input1 = new Scanner(System.in);
+        Scanner input2 = new Scanner(System.in);
+
+        System.out.println("빼빼로 에 대한 정보 입력을 받습니다.\n" +
+                "순서대로 기입해 주시고, 내용이 없을 시 \"null\" 이라고 입력 바랍니다.\n" +
+                "교차 되는 부분이 기존과 같은 모양일 경우 같은 모양으로 입력 바랍니다.\n" +
+                "길이, 몸통 모양, 교차될 몸통 모양, 토핑 모양, 교차될 토핑 모양, 막대길이");
+
+        Pepero1 pepero = new Pepero1
+                (input1.nextInt(),input2.nextLine(),input2.nextLine(),input1.next(),
+                        input1.next(),input1.nextInt());
+
+        addPeperos.add(pepero);
+
+    }
     public static void addPepero(List<Pepero1> addPeperos) {
         Scanner input1 = new Scanner(System.in);
         Scanner input2 = new Scanner(System.in);
 
         for (int i = 0; i < addPeperos.size(); i++) {
-            System.out.println("추가 하는 빼빼로가 있습니까?");
+            System.out.println("추가 하는 빼빼로가 있습니까? yes or no");
             String answer = input1.next();
-            if (!answer.equals("null")) {
+            if (answer.equals("yes")) {
                 System.out.println("추가 빼빼로에 대한 값을 입력 받습니다. 이전과 같이 입력 부탁드립니다.");
                 Pepero1 addtionalPepero = new Pepero1
                         (input1.nextInt(),input2.nextLine(),input2.nextLine(),input1.next(),
                         input1.next(),input1.nextInt());
                 addPeperos.add(addtionalPepero);
-            } else if (answer.equals("null")) {
+            } else if (answer.equals("no")) {
                 break;
+            } else {
+                System.out.println("잘못 입력 하셨습니다.");
             }
         }
     }
@@ -64,19 +82,9 @@ public class PeperoMaker1 {
     }
 
     public static void main(String[] args) {
-        Scanner input1 = new Scanner(System.in);
-        Scanner input2 = new Scanner(System.in);
         List<Pepero1> peperos = new ArrayList<>();
 
-        System.out.println("빼빼로 에 대한 정보 입력을 받습니다.\n" +
-                "순서대로 기입해 주시고, 내용이 없을 시 \"null\" 이라고 입력 바랍니다.\n" +
-                "교차 되는 부분이 기존과 같은 모양일 경우 같은 모양으로 입력 바랍니다.\n" +
-                "길이, 몸통 모양, 교차될 몸통 모양, 토핑 모양, 교차될 토핑 모양, 막대길이");
-
-        Pepero1 pepero = new Pepero1
-                (input1.nextInt(),input2.nextLine(),input2.nextLine(),input1.next(),
-                        input1.next(),input1.nextInt());
-        peperos.add(pepero);
+        getAnswers(peperos);
 
         addPepero(peperos);
 
