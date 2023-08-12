@@ -1,4 +1,4 @@
-public class Pepero1 extends PeperoMaker1 {
+public class Pepero1 {
     public int length;
     public String firstBody;
     public String secondBody;
